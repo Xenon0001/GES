@@ -2,6 +2,7 @@ import customtkinter as cus
 import tkinter as tk
 import sqlite3
 from modules.students import Students
+from modules.teachers import Profesores
 from modules.subjects import Subjects
 
 class GesApp(cus.CTk):
@@ -17,11 +18,11 @@ class GesApp(cus.CTk):
         self.menu = Menu(self, self.mostrar_seccion)
         self.main = Main(self)
 
-        # Diccionario de secciones
+        # Diccionario de secciones/ Abrir cada sección
         self.secciones = {
             "Inicio": self.mostrar_inicio,
             "Estudiantes": lambda:self.main.cambiar_contenido(Students),
-            # "profesores": lambda:self.main_cambiar_contenido(Profesores),
+            "Profesores": lambda:self.main.cambiar_contenido(Profesores),
             "Asignaturas": lambda:self.main.cambiar_contenido(Subjects),
         }
 
@@ -56,6 +57,7 @@ class Main(cus.CTkFrame):
         for widget in self.winfo_children():
             widget.destroy()
     
+    # Motrar el contenido de la clase según el botón seleccionado
     def cambiar_contenido(self, clase):
         self.limpiar()
         vista = clase(self)
